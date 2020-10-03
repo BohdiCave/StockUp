@@ -17,11 +17,8 @@ $.ajax(settings).then(function (response) {
 		var articleRow = $(".news-item"+i);
 		var aRow = $("<tr>");
 		var publisherTd = $("<td>").text(response.news[i].publisher);
-		var titleTd = $("<td>").text(response.news[i].title);
-		var linkTd = $("<td>").text(response.news[i].link);
-		// var articleLink = '<a href="' + response.news[i].link + '"></a>'
-		// var linkTd = $("<td>").text(articleLink);
-		aRow.append(publisherTd, titleTd, linkTd);
+		var titleLink = '<a href="' + response.news[i].link + '">' + response.news[i].title + '</a>';
+		aRow.append(publisherTd, titleLink);
 		articleRow.append(aRow);
 	}
 	articleRow.append(aRow);
