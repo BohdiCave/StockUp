@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockUp</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" type="text/css" href="./assets/style.css">
+
+</head>
+<body>
+    <header class="row">
+        <div class="column column-10 logo">
+            <img id="logo" src="./assets/stockuplogo-sm.png" alt="StockUp logo">
+        </div>
+        <div class="column column-50 slogan">
+            <p id="header-para">A one-stop source of information for a beginner investor</p>
+        </div>
+        <div class="column column-34 navigation">
+            <ul id="header-ul">
+                <li><a href="#newsearch">New search</a></li>
+                <li><a href="#results">Investment details</a></li>
+                <li><a href="#news">Recent news</a></li>
+                <li><a href="#contacts">Contacts</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <form class="row">
+                <fieldset class="column">
+                    <div class="row centered" id="newsearch">
+                        <h2>Search for the Most Current Investment Information</h2>
+                    </div>
+                    <div class="row" id="search">
+                        <div class="column column-40">
+                            <label for="nameField">Company name or Stock symbol</label>
+                            <input type="text" placeholder="i.e. Renewable Energy Group OR REGI" id="nameField">
+                    
+                            <label for="sector-list">Industry sectors (select all that apply)</label>
+                            <select id="sector-list" multiple size="5">
+                                <option value="none">No selection</option>
+                                <option value="snapshot">Snapshot of all sectors</option>
+                                <option value="communications">Communications services</option>
+                                <option value="consumer">Consumer discretionary</option>
+                                <option value="staples">Consumer staples</option>
+                                <option value="energy">Energy</option>
+                                <option value="financials">Financials</option>
+                                <option value="healthcare">Health Care</option>
+                                <option value="industrials">Industrials</option>
+                                <option value="infotech">Information Technology</option>
+                                <option value="materials">Materials</option>
+                                <option value="realestate">Real Estate</option>
+                                <option value="utilities">Utilities</option>
+                            </select>
+                        </div>
+                        <div class="column column-40"> 
+                            <label for="timeRangeField">Time range for historical information</label>
+                            <select id="timeRangeField">
+                                <option value="1">1 month</option>
+                                <option value="3">3 months (1 qtr)</option>
+                                <option value="6">6 months (2 qtrs)</option>
+                                <option value="9">9 months (3 qtrs)</option>
+                                <option value="12">1 year (4 qtrs)</option>
+                                <option value="24">2 years (8 qtrs)</option>
+                            </select>
+
+                            <label for="industry">Industry group of interest (<a class="form-link" href="https://www.investopedia.com/terms/i/industrygroup.asp">reference list</a>)</label>
+                            <input type="text" placeholder="i.e. media, software, gas utilities, etc." id="industry">
+                            
+                            <div class="buttons">
+                                <input class="button-black" type="submit" value="Add Search Filter">
+                                <input class="button-black" type="submit" value="Send">
+                            </div>
+                        </div>  
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="row" id="results">
+            <div class="column">
+                <h3>Stock performance data</h3>
+            </div>
+        </div>
+        <div class="row" id="charts">
+            <div class="column column-60" id="chart">
+                <br>
+                (Chart timeline based on input criteria)
+                <br><br>Use charts.js
+                <br><br><br><br><br><br><br><br><br>
+            </div> 
+            <div class="column-33">
+                <br><br><br>
+                Stock - numerical performance info
+                <br><br><br>
+            </div>
+        </div>
+        <div class="row newshead" id="news">
+            <div class="column" id="newshead">
+                <h3>Latest news about <span>[populate name/industry/sector from the input form]</span></h3>
+            </div>
+        </div>
+        <div class="row articles">
+            <article class="column column-40 news-item"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
+            <article class="column column-40 news-item"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
+            <article class="column column-40 news-item"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
+            <article class="column column-40 news-item"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
+            <article class="column column-40 news-item"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
+            <article class="column column-40 news-item"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
+        </div>
+        <div class="row" id="contacts">
+            <div class="column column-60 contributors">
+            <img src="./assets/stockuplogo-01.jpg" alt="StockUp logo">
+            <ul>
+                <li><strong>Contributors:</strong></li>
+                <li class="contributor"><a href="https://dfischer4623.github.io/">David Fischer</a></li>
+                <li class="contributor"><a href="https://loganfmorro.github.io/">Logan Morro</a></li>
+                <li class="contributor"><a href="https://bohdicave.github.io/">Bohdan Pechenyak</a></li>
+                <li class="contributor"><a href="https://dereck8187.github.io/">Dereck Robinson</a></li>
+            </ul>
+                </div>
+        </div>
+    </main>
+
+    <footer class="row">
+            <p>2020 - Made with love by <a href="https://github.com/BohdiCave/StockUp">Socially Distanced Campers</a></p>
+    </footer>
+
+</body>
+</html>
