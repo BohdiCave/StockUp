@@ -11,15 +11,16 @@
 
 $.ajax(settings).then(function (response) {
 	
-	
-	for (var i=0; i< response.news.length; i++){
+	console.log(response.news);
+
+	for (var i=0; i < response.news.length; i++){
 		var articleRow = $(".news-item"+i);
 		var aRow = $("<tr>");
+		var publisherTd = $("<td>").text(response.news[i].publisher);
 		var titleTd = $("<td>").text(response.news[i].title);
 		var linkTd = $("<td>").text(response.news[i].link);
 		// var articleLink = '<a href="' + response.news[i].link + '"></a>'
 		// var linkTd = $("<td>").text(articleLink);
-		var publisherTd = $("<td>").text(response.news[i].publisher);
 		aRow.append(publisherTd, titleTd, linkTd);
 		articleRow.append(aRow);
 	}
