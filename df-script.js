@@ -21,5 +21,4 @@ $.ajax(settings).then(function (response) {
 		aRow.append(publisherTd, titleLink);
 		articleRow.append(aRow);
 	}
-	articleRow.append(aRow);
 });
