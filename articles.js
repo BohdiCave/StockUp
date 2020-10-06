@@ -14,7 +14,7 @@ $.ajax(settings).then(function (response) {
 	console.log(response.news);
 
 	for (var i=0; i < response.news.length; i++){
-		var articleRow = $("#item0"+i);
+		var articleRow = $("#item0"+i);   
 		var aRow = $("<tr>");
 		var publisherTd = $("<td>").text(response.news[i].publisher);
 		var titleLink = '<a href="' + response.news[i].link + '">' + response.news[i].title + '</a>';
