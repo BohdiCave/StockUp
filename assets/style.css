@@ -1,6 +1,7 @@
 /* general styling */
-h1 {
-    color: rgba(39, 174, 96, 1.0);
+h2 {
+    font-size: 3.0rem;
+    text-align: center;
 }
 
 h3 {
@@ -18,22 +19,28 @@ a:hover {
     color: darkgreen;
 }
 
-/* general class of centered flex row containers */
+/* General class of centered rows */
 .row.centered {
     justify-content: center;
 }
 
-/* elements of the header */
+/* Elements of the header */
 header {
     position: fixed;
-    z-index: 2;
+    width: 100%;
+    z-index: 1;
     background-color: white;
     padding: 0;
 }
 
-#header-para, 
-#header-ul {
-    margin-bottom: 10px;
+nav.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#logoDiv {
+    flex: 0 1 auto; 
 }
 
 #logo {
@@ -42,24 +49,33 @@ header {
     width: 150px;   
 }
 
-.slogan p {
-    padding-top: 20px;
-    font-weight: bold;
+.button.button-clear {
+    color: rgba(39, 174, 96, 1.0);
+    font-size: 1.7rem;
+    padding: 15px;
+    float: right;
+}
+    
+.column.collapse {
+    flex: 1 0 auto;
+    display: none;
+    flex-direction: column;
 }
 
-ul {
+nav ul {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;    
+    flex-direction: column;
+    align-items: flex-start;    
 }
 
 li {
     flex: 0 1 auto;
-    padding-top: 20px;
+    padding-top: 5px;
     display: inline;
 }
 
-/* search form */
+
+/* Section 1 - Search form */
 .container {
     padding-top: 100px;
 }
@@ -76,7 +92,8 @@ fieldset, form {
 #search {
     padding: 25px 0px;
     border-radius: 15px;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
     background-color: rgba(39, 174, 96, .9);
     color: white;
 }
@@ -109,16 +126,15 @@ select option {
     color: white;
 }
 
-div.buttons {
+#buttons {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding: 10px;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* search results - chart */
+/* Section 2 - Results: stock chart and performance data */
 #results {
-    padding: 50px 0px;
+    padding: 30px 0px;
 }
 
 #charts {
@@ -130,10 +146,11 @@ div.buttons {
 #chart {
     background-color: rgba(39, 174, 96, .2);
 }
-/* search results - news */
+
+/* Section 3 - Search results: latest news */
 .newshead {
     justify-content: center;
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 0px;
 }
 
@@ -142,70 +159,51 @@ div.buttons {
 }
 
 .articles {
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
 }
 
 .news-item {
     text-align: center;
     background-color: rgba(39, 174, 96, .2);
-    margin: 50px 0px;
+    margin: 20px 0px;
     border-radius: 15px;
 }
 
+/* Section 4 - Contacts */
+#contacts {
+    align-items: center;
+    justify-content: center;
+}
+
+#section-four ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Footer */
 footer {
     font-weight: bold;
     justify-content: center;
-}
-
-#contacts {
-    justify-content: center;
-}
-
-
-
-/* Extending The Inheritances */
-
-/* Custom color */
-/* 
-  .button-black.button-clear,
-  .button-black.button-outline {
-    background-color: transparent;
-    color: black;
-  }
-  .button-black.button-clear {
-    border-color: transparent;
-  }
-  
-  /* Custom size */
-  /* .button-small {
-    font-size: .8rem;
-    height: 2.8rem;
-    line-height: 2.8rem;
-    padding: 0 1.5rem;
-  }
-  
-  .button-large {
-    font-size: 1.4rem;
-    height: 4.5rem;
-    line-height: 4.5rem;
-    padding: 0 2rem;
-  }
- */ 
-
-
-/* Larger than mobile screen */
-@media (min-width: 40.0rem) {  
-
+    text-align: center;
 }
 
 /* Larger than tablet screen */
 @media (min-width: 80.0rem) {  
+    h2, h3 {font-size: 4.0rem;}
+    #logoDiv {flex: 1 0 25%;}
 
+    nav ul {flex: 0 1 auto;
+        display: flex;
+        flex-direction: row;
+        align-items: space-evenly;
+        margin-top: 15px;}
+    
+        li {padding-top: 5px;
+        margin-right: 20px;
+        display: inline;}
 }
-
-/* Larger than desktop screen */
-@media (min-width: 120.0rem) { 
-
- }

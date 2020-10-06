@@ -8,34 +8,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
     <link rel="stylesheet" type="text/css" href="./assets/style.css">
-
 </head>
 <body>
-    <header class="row">
-        <div class="column column-10 logo">
-            <img id="logo" src="./assets/stockuplogo-sm.png" alt="StockUp logo">
-        </div>
-        <div class="column column-50 slogan">
-            <p id="header-para">A one-stop source of information for a beginner investor</p>
-        </div>
-        <div class="column column-34 navigation">
-            <ul id="header-ul">
-                <li><a href="#newsearch">New search</a></li>
-                <li><a href="#results">Investment details</a></li>
-                <li><a href="#news">Recent news</a></li>
-                <li><a href="#contacts">Contacts</a></li>
-            </ul>
-        </div>
+    <header>
+        <nav class="row">
+            <div class="column column-30" id="logoDiv">
+                <img id="logo" src="./assets/stockuplogo-sm.png" alt="StockUp logo">
+            </div>
+            <div class="column column-20">
+                <button class="button button-clear" id="toggleBtn" aria-controls="#navToggle" aria-expanded="true" aria-label="Toggle navigation">
+                    <span id="nav-toggler">Menu</span>
+                </button>    
+            </div>
+            <div class="column collapse" id="navToggle">
+                <ul id="header-ul">
+                    <li><strong>Investment tips for the beginner</strong></li>
+                    <li><a href="#section-one" id="nl1" class="nav-link">New search</a></li>
+                    <li><a href="#section-two" id="nl2" class="nav-link">Investment details</a></li>
+                    <li><a href="#section-three" id="nl3" class="nav-link">Recent news</a></li>
+                    <li><a href="#section-four" id="nl4" class="nav-link">Contacts</a></li>
+                </ul>
+            </div>
+            
+        </nav>
     </header>
 
     <main class="container">
-        <form class="row">
+        <section id="section-one">
+            <form class="row">
                 <fieldset class="column">
-                    <div class="row centered" id="newsearch">
+                    <div class="row centered">
                         <h2>Search for the Most Current Investment Information</h2>
                     </div>
                     <div class="row" id="search">
-                        <div class="column column-40">
+                        <div class="column column-80" id="mainFields">
                             <label for="nameField">Company name or Stock symbol</label>
                             <input type="text" placeholder="i.e. Renewable Energy Group OR REGI" id="nameField">
                     
@@ -56,7 +62,10 @@
                                 <option value="utilities">Utilities</option>
                             </select>
                         </div>
-                        <div class="column column-40"> 
+                        <div class="column column-80" id="moreFields"> 
+                            <label for="industry">Industry group of interest (<a class="form-link" href="https://www.investopedia.com/terms/i/industrygroup.asp">reference list</a>)</label>
+                            <input type="text" placeholder="i.e. media, software, gas utilities, etc." id="industry">
+                            
                             <label for="timeRangeField">Time range for historical information</label>
                             <select id="timeRangeField">
                                 <option value="1">1 month</option>
@@ -66,67 +75,107 @@
                                 <option value="12">1 year (4 qtrs)</option>
                                 <option value="24">2 years (8 qtrs)</option>
                             </select>
-
-                            <label for="industry">Industry group of interest (<a class="form-link" href="https://www.investopedia.com/terms/i/industrygroup.asp">reference list</a>)</label>
-                            <input type="text" placeholder="i.e. media, software, gas utilities, etc." id="industry">
-                            
-                            <div class="buttons">
-                                <input class="button-black" type="submit" value="Add Search Filter">
-                                <input class="button-black" type="submit" value="Send">
-                            </div>
+                        </div>
+                        <div class="column column-80" id="buttons">
+                                <input id="addFieldBtn" class="button-black" type="submit" value="Add Search Filter">
+                                <input id="searchBtn" class="button-black" type="submit" value="Search">
                         </div>  
                     </div>
                 </fieldset>
             </form>
-        </div>
-        <div class="row" id="results">
-            <div class="column">
-                <h3>Stock performance data</h3>
-            </div>
-        </div>
-        <div class="row" id="charts">
-            <div class="column column-60" id="chart">
-                <br>
-                (Chart timeline based on input criteria)
-                <br><br>Use charts.js
-                <br><br><br><br><br><br><br><br><br>
-            </div> 
-            <div class="column-33">
-                <br><br><br>
-                Stock - numerical performance info
-                <br><br><br>
-            </div>
-        </div>
-        <div class="row newshead" id="news">
-            <div class="column" id="newshead">
-                <h3>Latest news about <span>[populate name/industry/sector from the input form]</span></h3>
-            </div>
-        </div>
-        <div class="row articles">
-            <article class="column column-40 news-item"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
-            <article class="column column-40 news-item"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
-            <article class="column column-40 news-item"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
-            <article class="column column-40 news-item"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
-            <article class="column column-40 news-item"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
-            <article class="column column-40 news-item"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
-        </div>
-        <div class="row" id="contacts">
-            <div class="column column-60 contributors">
-            <img src="./assets/stockuplogo-01.jpg" alt="StockUp logo">
-            <ul>
-                <li><strong>Contributors:</strong></li>
-                <li class="contributor"><a href="https://dfischer4623.github.io/">David Fischer</a></li>
-                <li class="contributor"><a href="https://loganfmorro.github.io/">Logan Morro</a></li>
-                <li class="contributor"><a href="https://bohdicave.github.io/">Bohdan Pechenyak</a></li>
-                <li class="contributor"><a href="https://dereck8187.github.io/">Dereck Robinson</a></li>
-            </ul>
+        </section>
+        <section id="section-two">
+            <div class="row" id="results">
+                <div class="column">
+                    <h3>Stock performance data</h3>
                 </div>
-        </div>
+            </div>
+            <div class="row" id="charts">
+                <div class="column column-80" id="chart">
+                    <br>
+                    (Chart timeline based on input criteria)
+                    <br><br>Use charts.js
+                    <br><br><br><br><br><br><br><br><br>
+                </div> 
+                <div class="column-33">
+                    <br><br><br>
+                    Stock - numerical performance info
+                    <br><br><br>
+                </div>
+            </div>
+        </section>
+        <section id="section-three">
+            <div class="row newshead" id="news">
+                <div class="column" id="newshead">
+                    <h3>Latest news about <span>[populate name/industry/sector from the input form]</span></h3>
+                </div>
+            </div>
+            <div class="row articles">
+                <article class="column column-80 news-item" id="item01"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
+                <article class="column column-80 news-item" id="item02"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
+                <article class="column column-80 news-item" id="item03"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
+                <article class="column column-80 news-item" id="item04"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
+                <article class="column column-80 news-item" id="item05"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
+                <article class="column column-80 news-item" id="item06"><br><br><br><br>Link populated from ajax request<br><br><br><br></article>
+            </div>
+        </section>
+        <section id="section-four">
+            <div class="row" id="contacts">
+                <div class="column column-60 contributors">
+                <img src="./assets/stockuplogo-01.jpg" alt="StockUp logo">
+                <ul>
+                    <li><strong>Contributors:</strong></li>
+                    <li class="contributor"><a href="https://dfischer4623.github.io/">David Fischer</a></li>
+                    <li class="contributor"><a href="https://loganfmorro.github.io/">Logan Morro</a></li>
+                    <li class="contributor"><a href="https://bohdicave.github.io/">Bohdan Pechenyak</a></li>
+                    <li class="contributor"><a href="https://dereck8187.github.io/">Dereck Robinson</a></li>
+                </ul>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="row">
-            <p>2020 - Made with love by <a href="https://github.com/BohdiCave/StockUp">Socially Distanced Campers</a></p>
+            <p>2020 - Made with love by <br> <a href="https://github.com/BohdiCave/StockUp">Socially Distanced Campers</a></p>
     </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        var collapse = document.querySelector(".collapse");
+        var toggleBtn = document.querySelector("#toggleBtn");
+        function toggleMenu(e) {
+            e.stopPropagation();
+            collapse.style.display = "flex";
+            toggleBtn.style.display = "none";
+        }
+        toggleBtn.addEventListener("click", toggleMenu);
+
+        var nl1 = document.querySelector("#nl1");
+        var nl2 = document.querySelector("#nl2");
+        var nl3 = document.querySelector("#nl3");
+        var nl4 = document.querySelector("#nl4");
+        function closeDropdown() {
+            collapse.style.display = "none";
+            toggleBtn.style.display = "block";
+        }
+        nl1.addEventListener("click", closeDropdown);
+        nl2.addEventListener("click", closeDropdown);
+        nl3.addEventListener("click", closeDropdown);
+        nl4.addEventListener("click", closeDropdown);
+
+        var moreFields = document.querySelector("#moreFields");
+        var addFieldBtn = document.querySelector("#addFieldBtn");
+        var searchBtn = document.querySelector("#searchBtn");
+        function addSearchFilter(e) {
+            e.preventDefault();
+            var newFilter = document.createElement("input");
+            newFilter.setAttribute("type", "text");
+            newFilter.setAttribute("placeholder", "additional filter    ");
+            newFilter.setAttribute("class", "newFilter");
+            moreFields.append(newFilter);
+        }
+        addFieldBtn.addEventListener("click", addSearchFilter);
+    </script>
 
 </body>
 </html>
