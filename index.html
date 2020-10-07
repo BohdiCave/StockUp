@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StockUp</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
     <link rel="stylesheet" type="text/css" href="./assets/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
-
 </head>
 <body>
     <header>
@@ -45,10 +42,10 @@
                     </div>
                     <div class="row" id="search">
                         <div class="column column-80" id="mainFields">
-                            <label for="nameField">Company name or Stock symbol</label>
-                            <input type="text" placeholder="i.e. Renewable Energy Group OR REGI" id="nameField">
+                            <label for="nameField">Stock symbol (<a class="form-link" href="https://www.dogsofthedow.com/stock-symbols-list.htm">reference list</a>)</label>
+                            <input type="text" placeholder="i.e. APPL, FB, or REGI" id="nameField">
                     
-                            <label for="sector-list">Industry sectors (select all that apply)</label>
+                            <!-- <label for="sector-list">Industry sectors (select all that apply)</label>
                             <select id="sector-list" multiple size="5">
                                 <option value="none">No selection</option>
                                 <option value="snapshot">Snapshot of all sectors</option>
@@ -71,16 +68,16 @@
                             
                             <label for="timeRangeField">Time range for historical information</label>
                             <select id="timeRangeField">
-                                <option value="1">1 month</option>
-                                <option value="3">3 months (1 qtr)</option>
-                                <option value="6">6 months (2 qtrs)</option>
-                                <option value="9">9 months (3 qtrs)</option>
-                                <option value="12">1 year (4 qtrs)</option>
-                                <option value="24">2 years (8 qtrs)</option>
-                            </select>
+                                <option value="1">1 day</option>
+                                <option value="30">1 month</option>
+                                <option value="90">3 months</option>
+                                <option value="180">6 months</option>
+                                <option value="365">1 year</option>
+                                <option value="730">5 years</option>
+                            </select> -->
                         </div>
                         <div class="column column-80" id="buttons">
-                                <input id="addFieldBtn" class="button-black" type="submit" value="Add Search Filter">
+                                <!-- <input id="addFieldBtn" class="button-black" type="submit" value="Add Search Filter"> -->
                                 <input id="searchBtn" class="button-black" type="submit" value="Search">
                         </div>  
                     </div>
@@ -94,22 +91,35 @@
                 </div>
             </div>
             <div class="row" id="charts">
-                <div class="column column-80" id="chart">
-                    <br>
-                    (Chart timeline based on input criteria)
-                    <br><br>Use charts.js
-                    >><br>
-                </div> 
-                <div class="column-33" id="stock-info">
-                    
-                    
+                <div class="column column-50" id="chart"></div> 
+                <div class="column-40" id="stock-info">
+                <table>
+                    <thead>
+                        <tr><th class="td"></th>
+                            <td></td></tr>
+                    </thead>
+                    <tbody>
+                        <tr id="row1"><th>Price: <br> Change: </th>
+                            <td></td></tr>
+                        <tr id="row2"><th>Previous close: <br> Open:</th>
+                            <td></td></tr>
+                        <tr id="row3"><th>Daily High <br> Daily Low:</th>
+                            <td></td></tr>
+                        <tr id="row4"><th>52wk High <br> 52wk Low:</th>
+                            <td></td></tr>
+                        <tr id="row5"><th>Shares: <br> Earnings per share:</th>
+                            <td></td></tr>
+                        <tr id="row6"><th>Price/earnings ratio: <br> Market capitalization:</th>
+                            <td></td></tr>     
+                    </tbody>
+                    </table>  
                 </div>
             </div>
         </section>
         <section id="section-three">
             <div class="row newshead" id="news">
                 <div class="column" id="newshead">   
-                    <h3>Latest news about <span>[populate name/industry/sector from the input form]</span></h3>
+                    <h3>Latest news about <span id="companyName"></span></h3>
                 </div>
             </div>
             <div class="row articles">
@@ -139,51 +149,11 @@
         </section>
     </main>
 
-    
-
     <footer class="row">
             <p>2020 - Made with love by <br> <a href="https://github.com/BohdiCave/StockUp">Socially Distanced Campers</a></p>
     </footer>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        var collapse = document.querySelector(".collapse");
-        var toggleBtn = document.querySelector("#toggleBtn");
-        function toggleMenu(e) {
-            e.stopPropagation();
-            collapse.style.display = "flex";
-            toggleBtn.style.display = "none";
-        }
-        toggleBtn.addEventListener("click", toggleMenu);
 
-        var nl1 = document.querySelector("#nl1");
-        var nl2 = document.querySelector("#nl2");
-        var nl3 = document.querySelector("#nl3");
-        var nl4 = document.querySelector("#nl4");
-        function closeDropdown() {
-            collapse.style.display = "none";
-            toggleBtn.style.display = "block";
-        }
-        nl1.addEventListener("click", closeDropdown);
-        nl2.addEventListener("click", closeDropdown);
-        nl3.addEventListener("click", closeDropdown);
-        nl4.addEventListener("click", closeDropdown);
-
-        var moreFields = document.querySelector("#moreFields");
-        var addFieldBtn = document.querySelector("#addFieldBtn");
-        var searchBtn = document.querySelector("#searchBtn");
-        function addSearchFilter(e) {
-            e.preventDefault();
-            var newFilter = document.createElement("input");
-            newFilter.setAttribute("type", "text");
-            newFilter.setAttribute("placeholder", "additional filter    ");
-            newFilter.setAttribute("class", "newFilter");
-            moreFields.append(newFilter);
-        }
-        addFieldBtn.addEventListener("click", addSearchFilter);
-    </script>
-    <script src="articles.js"></script>
-    <script src="stock-script.js"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
 </html>

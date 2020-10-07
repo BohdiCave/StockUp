@@ -117,12 +117,16 @@ select:focus {
     border-color: darkslategray;
 }
 
+#sector-list {
+    background-color: transparent;
+}
+
 select#timeRangeField:focus {
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 8" width="30"><path fill="%23336666" d="M0,0l6,8l6-8"/></svg>') center right no-repeat;
 }
 
-select option {
-    background-color: rgba(39, 174, 96, .8);
+#timeRangeField option {
+    background-color: rgba(39, 174, 96, .9);
     color: white;
 }
 
@@ -138,13 +142,24 @@ select option {
 }
 
 #charts {
-    background-color: rgba(39, 174, 96, .2);
+    background-color: rgba(39, 174, 96, .9);
     border-radius: 15px;
     justify-content: space-around;
 }
 
 #chart {
-    background-color: rgba(39, 174, 96, .2);
+    background-color: rgba(41, 83, 59, 0.2);
+    border-radius: 15px;
+}
+
+#stock-info {
+    padding: 15px;
+    color: black;
+}
+
+td, .td {
+    color: white;
+    font-weight: bold;
 }
 
 /* Section 3 - Search results: latest news */
@@ -164,10 +179,23 @@ select option {
 }
 
 .news-item {
-    text-align: center;
-    background-color: rgba(39, 174, 96, .2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(39, 174, 96, 1.0);
     margin: 20px 0px;
     border-radius: 15px;
+}
+
+.news-item td {
+    padding: 5px;
+    margin: 5px;
+}
+
+.news-item a {
+    color: black;
+    margin: 5px;
+    padding: 5px;
 }
 
 /* Section 4 - Contacts */
