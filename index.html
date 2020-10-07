@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
     <link rel="stylesheet" type="text/css" href="./assets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+
 </head>
 <body>
     <header>
@@ -97,10 +100,9 @@
                     <br><br>Use charts.js
                     >><br>
                 </div> 
-                <div class="column-33">
-                    <br><br><br>
-                    Stock - numerical performance info
-                    <br><br><br>
+                <div class="column-33" id="stock-info">
+                    
+                    
                 </div>
             </div>
         </section>
@@ -181,6 +183,7 @@
         addFieldBtn.addEventListener("click", addSearchFilter);
     </script>
     <script src="articles.js"></script>
+    <script src="stock-script.js"></script>
 
 </body>
 </html>
