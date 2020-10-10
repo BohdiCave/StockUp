@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StockUp</title>
+    <script src= "https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script> 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
@@ -43,42 +44,10 @@
                     <div class="row" id="search">
                         <div class="column column-80" id="mainFields">
                             <label for="nameField">Stock symbol (<a class="form-link" href="https://www.dogsofthedow.com/stock-symbols-list.htm">reference list</a>)</label>
-                            <input type="text" placeholder="i.e. APPL, FB, or REGI" id="nameField">
-                    
-                            <!-- <label for="sector-list">Industry sectors (select all that apply)</label>
-                            <select id="sector-list" multiple size="5">
-                                <option value="none">No selection</option>
-                                <option value="snapshot">Snapshot of all sectors</option>
-                                <option value="communications">Communications services</option>
-                                <option value="consumer">Consumer discretionary</option>
-                                <option value="staples">Consumer staples</option>
-                                <option value="energy">Energy</option>
-                                <option value="financials">Financials</option>
-                                <option value="healthcare">Health Care</option>
-                                <option value="industrials">Industrials</option>
-                                <option value="infotech">Information Technology</option>
-                                <option value="materials">Materials</option>
-                                <option value="realestate">Real Estate</option>
-                                <option value="utilities">Utilities</option>
-                            </select>
-                        </div>
-                        <div class="column column-80" id="moreFields"> 
-                            <label for="industry">Industry group of interest (<a class="form-link" href="https://www.investopedia.com/terms/i/industrygroup.asp">reference list</a>)</label>
-                            <input type="text" placeholder="i.e. media, software, gas utilities, etc." id="industry">
-                            
-                            <label for="timeRangeField">Time range for historical information</label>
-                            <select id="timeRangeField">
-                                <option value="1">1 day</option>
-                                <option value="30">1 month</option>
-                                <option value="90">3 months</option>
-                                <option value="180">6 months</option>
-                                <option value="365">1 year</option>
-                                <option value="730">5 years</option>
-                            </select> -->
+                            <input type="text" placeholder="i.e. AAPL, FB, or REGI" id="nameField">
                         </div>
                         <div class="column column-80" id="buttons">
-                                <!-- <input id="addFieldBtn" class="button-black" type="submit" value="Add Search Filter"> -->
-                                <input id="searchBtn" class="button-black" type="submit" value="Search">
+                            <input id="searchBtn" class="button-black" type="submit" value="Search">
                         </div>  
                     </div>
                 </fieldset>
@@ -91,15 +60,17 @@
                 </div>
             </div>
             <div class="row" id="charts">
-                <div class="column column-50" id="chart"></div> 
-                <div class="column-40" id="stock-info">
+                <div class="column" id="chart-container">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class="column" id="stock-info">
                 <table>
                     <thead>
                         <tr><th class="td"></th>
                             <td></td></tr>
                     </thead>
                     <tbody>
-                        <tr id="row1"><th>Price: <br> Change: </th>
+                        <tr id="row1"><th>50-day avg: <br> 200-day avg: </th>
                             <td></td></tr>
                         <tr id="row2"><th>Previous close: <br> Open:</th>
                             <td></td></tr>
@@ -123,14 +94,8 @@
                 </div>
             </div>
             <div class="row articles">
-                <article class="column column-80 news-item" id="item00"></article>
-                <article class="column column-80 news-item" id="item01"></article>
-                <article class="column column-80 news-item" id="item02"></article>
-                <article class="column column-80 news-item" id="item03"></article>
-                <article class="column column-80 news-item" id="item04"></article>
-                <article class="column column-80 news-item" id="item05"></article>
-                <article class="column column-80 news-item" id="item06"></article>
-                <article class="column column-80 news-item" id="item07"></article>
+                <div class="column" id="news-items">
+                </div>
             </div>
         </section>
         <section id="section-four">
