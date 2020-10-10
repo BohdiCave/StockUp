@@ -113,23 +113,6 @@ select {
     border-color: whitesmoke;   
 }
 
-select:focus {
-    border-color: darkslategray;
-}
-
-#sector-list {
-    background-color: transparent;
-}
-
-select#timeRangeField:focus {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 8" width="30"><path fill="%23336666" d="M0,0l6,8l6-8"/></svg>') center right no-repeat;
-}
-
-#timeRangeField option {
-    background-color: rgba(39, 174, 96, .9);
-    color: white;
-}
-
 #buttons {
     display: flex;
     flex-direction: column;
@@ -144,12 +127,7 @@ select#timeRangeField:focus {
 #charts {
     background-color: rgba(39, 174, 96, .9);
     border-radius: 15px;
-    justify-content: space-around;
-}
-
-#chart {
-    background-color: rgba(41, 83, 59, 0.2);
-    border-radius: 15px;
+    justify-content: space-between;
 }
 
 #stock-info {
@@ -174,28 +152,40 @@ td, .td {
 }
 
 .articles {
-    flex-direction: column;
-    align-items: center;
+    justify-content: flex-start;
 }
 
-.news-item {
+#news-items {
     display: flex;
     flex-direction: column;
-    align-items: center;
+
+}
+
+.row .news-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     background-color: rgba(39, 174, 96, 1.0);
-    margin: 20px 0px;
+    margin: 10px 0px;
     border-radius: 15px;
 }
 
-.news-item td {
-    padding: 5px;
-    margin: 5px;
+.row .source {
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 0px;
 }
 
-.news-item a {
+.row .news-link {
+    padding: 10px;
+    margin-bottom: 0px;
+}
+
+a[id*="news-item"] {
     color: black;
-    margin: 5px;
-    padding: 5px;
+    font-size: 14px;
 }
 
 /* Section 4 - Contacts */

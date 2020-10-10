@@ -25,49 +25,90 @@ nl2.addEventListener("click", closeDropdown);
 nl3.addEventListener("click", closeDropdown);
 nl4.addEventListener("click", closeDropdown);
 
-// // Adding more filters to the search criteria (optional)
-
-// var moreFields = document.querySelector("#moreFields");
-// var addFieldBtn = document.querySelector("#addFieldBtn");
-// var searchBtn = document.querySelector("#searchBtn");
-// function addSearchFilter(e) {
-//     e.preventDefault();
-//     var newFilter = document.createElement("input");
-//     newFilter.setAttribute("type", "text");
-//     newFilter.setAttribute("placeholder", "additional filter");
-//     newFilter.setAttribute("class", "newFilter");
-//     moreFields.append(newFilter);
-// }
-// addFieldBtn.addEventListener("click", addSearchFilter); -->
-
-// Financial Modeling Prep API - Basic stock quotes //
+//Financial Modeling Prep API - Basic stock quotes //
 function basicStockQuote() {
 	var settings = {
 		"async": true,
 		"crossDomain": true,
-		"url": "https://cors-anywhere.herokuapp.com/https://financialmodelingprep.com/api/v3/quote/" + stockSymbol +"?apikey=65b0722564360219ab8da0bd56970abb",
+		"url": "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + stockSymbol + "&apikey=DQAYETJTA1SPRVIF",
 		"method": "GET",
-		"headers": {
-			"x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
-			"x-rapidapi-key": "c67d1328d5msh462674a5c86d08cp1003bbjsn6dd13bf28832"
-		}
 	}
 	$.ajax(settings).done(function (response) {
 		console.log(response);
-		var info = response[0];
-		companyName = info.name;
-		$("#companyName").text(info.name);
+		companyName = response.Name;
+		$("#companyName").text(response.Name);
 		stockNews();
-		$("th:first").html(info.name + " (" + info.symbol + ")<br>" + info.exchange);
-		$("td:first").html("Volume: <br>" + (info.volume / 1e+6).toPrecision(4) + " M"); 
-		$("#row1").children("td").html(info.price + "<br>" + info.change + " / " + info.changesPercentage + "%"); 
-		$("#row2").children("td").html(info.previousClose + "<br>" + info.open);
-		$("#row3").children("td").html(info.dayHigh + "<br>" + info.dayLow);
-		$("#row4").children("td").html(info.yearHigh + "<br>" + info.yearLow);
-		$("#row5").children("td").html((info.sharesOutstanding / 1e+6).toPrecision(5) + " M <br>" + info.eps);
-		$("#row6").children("td").html(info.pe + "<br>" + (info.marketCap / 1e+9).toPrecision(6) + " B");
+		$("th:first").html(response.Name + " (" + response.Symbol + ")<br>" + response.Exchange);
+		$("td:first").html("Gross Profit: <br>" + (response.GrossProfitTTM / 1e+9).toPrecision(5) + " B"); 
+		$("#row1").children("td").html(response["50DayMovingAverage"] + "<br>" + response["200DayMovingAverage"]); 		
+		$("#row4").children("td").html(response["52WeekHigh"] + "<br>" + response["52WeekLow"]);
+		$("#row5").children("td").html((response.SharesOutstanding / 1e+6).toPrecision(5) + " M <br>" + response.EPS);
+		$("#row6").children("td").html(response.PERatio + "<br>" + (response.MarketCapitalization / 1e+9).toPrecision(6) + " B");
 	});
 }
+
+// Daily prices//
+function dailyPrices() {
+	var settings = {
+		"async": true,
+		"crossDomain": true,
+		"url": "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + stockSymbol + "&apikey=DQAYETJTA1SPRVIF",
+		"method": "GET",
+	}
+
+	$.ajax(settings).done(function (response) {
+		console.log(response);
+		var lastDate = response["Meta Data"];
+		console.log(lastDate);
+		var lastRefreshed = lastDate["3. Last Refreshed"];
+		console.log(lastRefreshed);
+		var dailyData = response["Time Series (Daily)"];
+		var todayData = dailyData[lastRefreshed];
+		$("#row2").children("td").html(todayData["4. close"] + "<br>" + todayData["1. open"]);
+		$("#row3").children("td").html(todayData["2. high"] + "<br>" + todayData["3. low"]);
+	});
+}
+		
+//Historical data//
+var historyData = [];
+var historyPrices = [];
+var historyDatesFull = [];
+var historyDatesYear = [];
+var historyMonthDate = [];
+function historicalPrices() {
+	var settings = {
+		"async": true,
+		"crossDomain": true,
+		"url": "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" + stockSymbol + "&apikey=DQAYETJTA1SPRVIF",
+		"method": "GET",
+	}
+
+	$.ajax(settings).done(function (response) {
+		console.log(response);
+		var weeklyData = response["Weekly Time Series"];
+		for (var key in weeklyData) {
+			historyDatesFull.unshift(key);
+			if (weeklyData.hasOwnProperty(key)) {
+				var data = weeklyData[key];
+				historyData.unshift(data);
+			}
+		}
+		for (i = 385; i < historyData.length; i++) {
+			var obj = historyData[i];
+			var openPrice = obj["1. open"];
+			historyPrices.push(openPrice);
+			historyDatesYear.push(historyDatesFull[i]);
+		}
+		for (j = 0; j < historyDatesYear.length; j++) {
+			var element = historyDatesYear[j];
+			var newEl = element.slice(5, 10);
+			historyMonthDate.push(newEl);
+		}
+		console.log(historyPrices);
+		console.log(historyMonthDate);
+		chartDraw();
+	});
+}	
 
 // Yahoo News API - stock news //
 async function stockNews() {
@@ -87,12 +128,17 @@ async function stockNews() {
 		console.log(response.news);
 	
 		for (var i=0; i < response.news.length; i++){
-			var articleRow = $("#item0"+i);   
-			var aRow = $("<tr>");
-			var publisherTd = $("<td>").text(response.news[i].publisher);
-			var titleLink = '<a href="' + response.news[i].link + '">' + response.news[i].title + '</a>';
-			aRow.append(publisherTd, titleLink);
-			articleRow.append(aRow);
+			var newsDiv = $("#news-items");
+			var articleRow = $("<article>");
+			articleRow.attr("class", "row news-item");   
+			var publisher = $("<div>");
+			publisher.attr("class", "column column-25 source");
+			publisher.text(response.news[i].publisher);
+			var titleLink = $("<div>");
+			titleLink.attr("class", "column column-50 news-link");
+			titleLink.html('<a id="news-item0'+(i+1)+'" href="' + response.news[i].link + '">' + response.news[i].title + '</a>');
+			articleRow.append(publisher, titleLink);
+			newsDiv.append(articleRow);	
 		}
 	});
 }
@@ -102,55 +148,50 @@ $("#searchBtn").on("click", function(event) {
 	$("article").empty();
 	stockSymbol = $("#nameField").val().toUpperCase();
 	basicStockQuote();
+	dailyPrices();
+	historicalPrices();
 	$("#nameField").val("");
 });
 
-
-//historical ratings//
-/*var settings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://cors-anywhere.herokuapp.com/https://financialmodelingprep.com/api/v3/historical-rating/AAPL?limit=100&apikey=8ea7feeec43d71792485f0610786aab7",
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
-		"x-rapidapi-key": "c67d1328d5msh462674a5c86d08cp1003bbjsn6dd13bf28832"
-	}
+function chartDraw() {
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: historyMonthDate,
+			datasets: [{
+				data: historyPrices,
+				backgroundColor: ['rgba(256, 256, 256, 1)'],
+				borderColor: ['rgba(0, 0, 0, 1)'],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			title: {
+				display: true,
+				text: "One Year's Weekly Close Prices",
+				fontColor: "#fff",
+				fontSize: "20"
+			},
+			legend: {
+				display: false
+			},
+			scales: {
+				xAxes: [{
+					ticks: {
+						fontColor: "#000"
+					}
+				}],
+				yAxes: [{
+					ticks: {
+						beginAtZero: true,
+						fontColor: "#000"
+					}
+				}],
+			},
+			responsive: true,
+			aspectRatio: 1.5,
+			maintainAspectRatio: true,
+		}
+	});
 }
-
-$.ajax(settings).done(function (response) {
-	console.log(response);
-});
-
-
-//income statement//
-var settings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://cors-anywhere.herokuapp.com/https://financialmodelingprep.com/api/v3/income-statement/AAPL?limit=120&apikey=8ea7feeec43d71792485f0610786aab7",
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
-		"x-rapidapi-key": "c67d1328d5msh462674a5c86d08cp1003bbjsn6dd13bf28832"
-	}
-}
-
-$.ajax(settings).done(function (response) {
-	console.log(response);
-});
-
-//income growth//
-var settings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://cors-anywhere.herokuapp.com/https://financialmodelingprep.com/api/v3/income-statement-growth/AAPL?limit=40&apikey=8ea7feeec43d71792485f0610786aab7",
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
-		"x-rapidapi-key": "c67d1328d5msh462674a5c86d08cp1003bbjsn6dd13bf28832"
-	}
-}
-
-$.ajax(settings).done(function (response) {
-	console.log(response);
-});*/
