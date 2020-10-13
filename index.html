@@ -12,15 +12,18 @@
 </head>
 <body>
     <header>
+        <!-- Navigation-->
         <nav class="row">
             <div class="column column-30" id="logoDiv">
                 <img id="logo" src="./assets/stockuplogo-sm.png" alt="StockUp logo">
             </div>
+            <!-- Toggle button for the collapsible menu -->
             <div class="column column-20">
                 <button class="button button-clear" id="toggleBtn" aria-controls="#navToggle" aria-expanded="true" aria-label="Toggle navigation">
                     <span id="nav-toggler">Menu</span>
                 </button>    
             </div>
+            <!-- Collapsible menu -->
             <div class="column collapse" id="navToggle">
                 <ul id="header-ul">
                     <li><strong>Investment tips for the beginner</strong></li>
@@ -30,11 +33,11 @@
                     <li><a href="#section-four" id="nl4" class="nav-link">Contacts</a></li>
                 </ul>
             </div>
-            
         </nav>
     </header>
 
     <main class="container">
+        <!-- Section 1 - Search Form -->
         <section id="section-one">
             <form class="row">
                 <fieldset class="column">
@@ -53,16 +56,20 @@
                 </fieldset>
             </form>
         </section>
+        <!-- Section 2 - Stock data -->
         <section id="section-two">
             <div class="row" id="results">
                 <div class="column">
                     <h3>Stock performance data</h3>
                 </div>
             </div>
+            <!-- Chart and stock info section -->
             <div class="row" id="charts">
+                <!-- Canvas API element -->
                 <div class="column" id="chart-container">
                     <canvas id="myChart"></canvas>
                 </div>
+                <!-- Basic stock information table -->
                 <div class="column" id="stock-info">
                 <table>
                     <thead>
@@ -87,6 +94,7 @@
                 </div>
             </div>
         </section>
+        <!-- Section 3 - Financial news -->
         <section id="section-three">
             <div class="row newshead" id="news">
                 <div class="column" id="newshead">   
@@ -94,10 +102,12 @@
                 </div>
             </div>
             <div class="row articles">
+                <!-- Articles are loaded into this section -->
                 <div class="column" id="news-items">
                 </div>
             </div>
         </section>
+        <!-- Section 4 - Contributor contacts -->
         <section id="section-four">
             <div class="row" id="contacts">
                 <div class="column column-60 contributors">

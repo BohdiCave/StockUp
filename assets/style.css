@@ -107,8 +107,7 @@ input[type="text"]:focus {
     border-color: darkslategray;
 }
 
-input[type="text"], 
-select {
+input[type="text"] {
     color: white;
     border-color: whitesmoke;   
 }
